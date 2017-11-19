@@ -2,4 +2,4 @@ print("--------------")
 print("----Pygram----")
 print("--------------")
 
-print("Lewd project!")
+print("MOBY DICK")
