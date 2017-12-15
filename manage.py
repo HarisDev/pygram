@@ -1,13 +1,9 @@
 #!/usr/bin/env python
 import os
 import sys
-from project.settings import DEBUG
 
 if __name__ == "__main__":
-    if DEBUG:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.local-settings")
-    else:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pygram.settings")
 
     from django.core.management import execute_from_command_line
 
