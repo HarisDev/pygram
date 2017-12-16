@@ -6,5 +6,5 @@ def index(request):
 
     return render(
         request,
-        'index.html'
+        'templates/index.html'
     )
