@@ -21,4 +21,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', home, name='home'),
     url(r'^login/$', login, name='login'),
+    url(r'^register/$', register, name='register'),
+    url(r'^chat/$', chat, name='chat'),
+    url(r'^settings/$', settings, name='settings'),
+    url(r'^friends/$', friends, name='friends'),
 ]
