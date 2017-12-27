@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'pygram.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '[pygram]',
-        'USER': '[root]',
-        'PASSWORD': '[haris]',
-        'HOST': '[89.36.218.144]',
-        'PORT': '',
+        'NAME': 'pygram',
+        'USER': 'pygramclient',
+        'PASSWORD': 'haris',
+        'HOST': '89.36.218.144',
+        'PORT': '3306',
     }
 }
 

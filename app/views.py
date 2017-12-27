@@ -7,3 +7,4 @@ def home(request):
         request,
         'main/index.html'
     )
+
