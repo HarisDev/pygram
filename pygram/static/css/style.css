@@ -579,3 +579,54 @@ body {
     font-size: 1.8em !important;
   }
 }
+.container {
+    margin-top: 20px;
+}
+.logo {
+    font-family: Ubuntu, sans-serif;
+    color:white;
+    font-size: 32px;
+}
+.menu {
+    float:right;
+}
+.menu li {
+    float: left;
+    color: white;
+    padding: 15px 15px;
+    border-bottom: solid 1px white;
+    margin-right: 10px;
+    font-family: "Ubuntu", sans-serif;
+
+    transition: background .25s ease-in-out;
+   -moz-transition: background .25s ease-in-out;
+   -webkit-transition: background .25s ease-in-out;
+}
+.menu li:hover {
+    background: white;
+
+
+}
+.menu li:hover {
+    color: black;
+}
+.menu li {
+    color:white;
+    text-decoration: none;
+
+     -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.menu  {
+    list-style: none;
+}
+div.row.app-one {
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+}
