@@ -603,15 +603,15 @@ body {
    -webkit-transition: background .25s ease-in-out;
 }
 .menu li:hover {
-    background: white;
+    background: #ffffff;
 
 
 }
 .menu li:hover {
-    color: black;
+    color: #000000;
 }
 .menu li {
-    color:white;
+    color: #ffffff;
     text-decoration: none;
 
      -webkit-border-top-left-radius: 5px;
