@@ -1,12 +1,12 @@
 from django.conf.urls import url
-from . import views
+from app.views import *
 
 app_name ='app'
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
-    url(r'^register/$', views.register, name='register'),
-    url(r'^login/$', views.login_user, name='login'),
-    url(r'^logout/$', views.logout, name='logout'),
+    url(r'^$', home, name='home'),
+    url(r'^register/$', register, name='register'),
+    url(r'^login/$', login_user, name='login'),
+    url(r'^logout/$', logout, name='logout'),
 
 ]
