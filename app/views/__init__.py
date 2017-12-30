@@ -4,3 +4,4 @@ from .chat import *
 from .friends import *
 from .settings import *
 from .home import *
+from .ajax import *
