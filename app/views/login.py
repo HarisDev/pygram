@@ -1,7 +1,9 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.shortcuts import render
+from django.contrib.auth.models import models
 from app.forms import UserForm
+from django.conf import settings
 
 def login_user(request):
     if request.method == "POST":
@@ -11,6 +13,8 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
+                user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='%(app_label)s_%(class)s_user',
+                                         blank=True, null=True, editable=False)
                 return render(request, 'main/index.html')
             else:
                 return render(request, 'main/login.html', {'error_message': 'Your account has been disabled'})

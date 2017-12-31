@@ -1,5 +1,8 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render
+from django.contrib.auth.models import models
+from django.conf import settings
+
 from app.forms import UserForm
 
 
@@ -15,8 +18,9 @@ def register(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-
-                return render(request, 'main/index.html', {'forms': form})
+                user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='%(app_label)s_%(class)s_user',
+                                         blank=True, null=True, editable=False)
+                return render(request, 'main/base.html', {'forms': form})
     context = {
         "form": form,
     }
