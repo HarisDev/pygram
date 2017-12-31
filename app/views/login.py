@@ -12,7 +12,7 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'main/index.html')
+                return render(request, 'main/chat.html')
             else:
                 return render(request, 'main/login.html', {'error_message': 'Your account has been disabled'})
         else:
