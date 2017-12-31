@@ -15,18 +15,45 @@
       }
 
       h1 {
-        margin-top: 300px;
+        margin-top: 200px;
         color: white;
         font-size: 60px;
         font-family: 'Ubuntu', Avantgarde, TeX Gyre Adventor, URW Gothic L, sans-serif;
+      }
+      #p1index {
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 35px;
+      }
+
+      form input {
+        outline: 0;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        background-color: rgba(255, 255, 255, 0.2);
+        width: 250px;
+        border-radius: 3px;
+        padding: 10px 15px;
+        margin: 0 auto 10px auto;
+        display: block;
+        text-align: center;
+        font-size: 18px;
+        color: white;
+        font-weight: 300;
+      }
+      form input:hover {
+          background-color: rgba(255, 255, 255, 0.4);
+      }
+      form input:focus {
+        background-color: white;
+        width: 300px;
+        color: #764ba2;
       }
     </style>
   </head>
   <body>
     <center>
       <h1>PYGRAM</h1>
-      <p>Welcome to Pygram chat.</p>
-      <p>Please register or login to access chat system.</p>
+      <p id="p1index">Welcome to Pygram chat.</p>
+      <p id="p2index">Please register or login to access chat system.</p>
       <form action="/login">
           <input type="submit" value="Login" />
       </form>
