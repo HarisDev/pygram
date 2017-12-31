@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from app.views import *
 
-app_name ='app'
+app_name ='pygram'
 
 urlpatterns = [
     url(r'^$', home, name='home'),
