@@ -1,12 +1,23 @@
 
 jQuery(document).ready(function(){
-    alert('{{ csrf_token }}');
-    jQuery.ajax({
-        method: "POST",
-        url: "/ajax/loadconversations/",
-        csrfmiddlewaretoken: '{{ csrf_token }}',
-        success: function(response){
-            alert("Works! " + response);
-        }
-    })
+    chat.init();
 });
+chat = {
+    init : function (){
+        this.loadConversations();
+    },
+
+    loadConversations : function(){
+        jQuery.ajax({
+            method: "POST",
+            url: "/ajax/loadconversations/",
+            csrfmiddlewaretoken: window.CSRF_TOKEN,
+            beforeSend: function(xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", window.CSRF_TOKEN);
+            },
+            success: function(response){
+                jQuery(".conversations").html(response);
+            }
+        });
+    }
+}
