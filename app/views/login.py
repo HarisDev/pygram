@@ -2,9 +2,12 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.shortcuts import render
 from app.forms import UserForm
+from django.http import HttpResponseRedirect
 
 
 def login_user(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect("/chat")
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']

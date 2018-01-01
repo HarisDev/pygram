@@ -18,11 +18,12 @@
     </form>
     <a href="/register">Register</a>
 -->
+
     <form class="form" method="post" action="." >{% csrf_token %}
         <input type="text" placeholder="Username" name="username">
         <input type="password" placeholder="Password" name="password">
         <button type="submit"  value="Login" id="login-button">Login</button>
-        <input type="hidden" name="next" value="/home" />
+        <input type="hidden" name="next" value="/chat" />
     </form>
 
 {% endblock %}
