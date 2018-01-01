@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from django.db import connection
 from django.contrib.auth.decorators import login_required
+from app.functions import *
 
 @login_required
 
@@ -32,12 +33,7 @@ def LoadConversations(request):
             username = red[1]
             first_name = red[2]
             last_name = red[3]
-            display_name = ""
-
-            if first_name == "":
-                display_name = username
-            else:
-                display_name = first_name + " " + last_name
+            display_name = returnName(first_name, last_name, username)
 
             site += """
             <div class="row sideBar-body">
@@ -61,5 +57,6 @@ def LoadConversations(request):
                         </div>
                       </div>
             """
+    cursor.close()
 
     return HttpResponse(site)
