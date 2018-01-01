@@ -1,8 +1,11 @@
-from django.contrib.auth import logout as django_logout
-from django.http import *
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+from django.shortcuts import render
+from app.forms import UserForm
 
-@login_required
 def logout(request):
-    django_logout(request)
-    return  HttpResponseRedirect('/login')
+    logout(request)
+    form = UserForm(request.POST or None)
+    context = {
+        "form": form,
+    }
+    return render(request, 'main/login.html')
