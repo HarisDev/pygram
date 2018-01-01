@@ -1,10 +1,13 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 
 from app.forms import UserForm
 
 
 def register(request):
+    if request.user.is_authenticated():
+        HttpResponseRedirect("/chat")
     form = UserForm(request.POST or None)
     if form.is_valid():
         user = form.save(commit=False)

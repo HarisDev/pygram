@@ -6,12 +6,15 @@
 
     <style>
     .helptext { display:none; }
+    .register table th { width:165px; }
     </style>
 
-    <form method="post" action=".">{% csrf_token %}
+    <form method="post" class="register" action=".">{% csrf_token %}
         <table border="0">
             {{ form.as_table }}
         </table>
         <button type="submit" value="Register">Register</button>
     </form>
+
+
 {% endblock %}

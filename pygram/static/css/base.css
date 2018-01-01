@@ -85,7 +85,7 @@ form input:hover {
 }
 form input:focus {
   background-color: white;
-  width: 300px;
+  /*width: 300px;*/
   color: #764ba2;
 }
 button {
