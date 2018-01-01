@@ -2,6 +2,7 @@
 jQuery(document).ready(function(){
     chat.init();
 });
+
 chat = {
     init : function (){
         this.loadConversations();
