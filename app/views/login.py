@@ -6,8 +6,6 @@ from django.http import HttpResponseRedirect
 
 
 def login_user(request):
-    if request.user.is_authenticated():
-        return HttpResponseRedirect("/chat")
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
@@ -15,11 +13,11 @@ def login_user(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'main/chat.html')
+                return HttpResponseRedirect("/chat")
             else:
-                return render(request, 'main/login.html', {'error_message': 'Your account has been disabled'})
+                return HttpResponseRedirect("/login", {'error_message': 'Your account has been disabled'})
         else:
-            return render(request, 'main/login.html', {'error_message': 'Invalid login'})
+            return HttpResponseRedirect("/login", {'error_message': 'Invalid login'})
     return render(request, 'main/login.html')
 
 def logout(request):
