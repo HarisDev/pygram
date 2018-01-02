@@ -82,16 +82,16 @@ WSGI_APPLICATION = 'pygram.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pygram',
-        'USER': 'pygramclient',
-        'PASSWORD': 'haris',
-        'HOST': '89.36.218.144',
-        'PORT': '3306',
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'pygram',
+#        'USER': 'pygramclient',
+#        'PASSWORD': 'haris',
+#        'HOST': '89.36.218.144',
+#        'PORT': '3306',
+#    }
+#}
 
 AUTH_PASSWORD_VALIDATORS = [
     {

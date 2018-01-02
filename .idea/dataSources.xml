@@ -17,5 +17,11 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="postgre heroku" uuid="9a17b315-92bc-4582-ad6f-5941ce88eff4">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-54-228-251-254.eu-west-1.compute.amazonaws.com :5432/d46k7gmu06pius</jdbc-url>
+    </data-source>
   </component>
 </project>
