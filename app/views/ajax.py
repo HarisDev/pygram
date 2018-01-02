@@ -60,6 +60,21 @@ def LoadConversations(request):
             last_name = red[3]
             display_name = returnName(first_name, last_name, username)
 
+            with connection.cursor() as cursor1:
+                cursor1.execute("""
+                    SELECT message FROM messages WHERE id_conversation = '""" + str(id) + """' ORDER BY id DESC 
+                    LIMIT 1
+                """)
+                fetch = cursor1.fetchone()
+
+                if not fetch:
+                    # do nothing
+                    lastmsg = ""
+                else:
+                    lastmsg = fetch[0]
+
+            cursor1.close()
+
             site += """
             <div onClick="chat.openChat('""" + str(id) + """');" class="row sideBar-body">
                         <div class="col-sm-3 col-xs-3 sideBar-avatar">
@@ -71,7 +86,8 @@ def LoadConversations(request):
                           <div class="row">
                             <div class="col-sm-8 col-xs-8 sideBar-name">
                               <span class="name-meta">"""
-            site += display_name + """
+            site += display_name + """<br />
+            <small>""" + lastmsg[:30] + """</small>
                             </span>
                             </div>
                             <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
@@ -154,15 +170,17 @@ def LoadChat(request, chat_id):
 def LoadMessages(request, chat_id):
     with connection.cursor() as cursor:
         cursor.execute("""
-        SELECT
-          messages.id,
-          messages.message,
-          messages.id_sender,
-          messages.time_sent
-          
-        FROM messages
-        WHERE id_conversation = '""" + chat_id + """' 
-        ORDER BY id DESC LIMIT 5
+        
+        
+        select * from (
+            select 
+                messages.id,
+                messages.message,
+                messages.id_sender,
+                messages.time_sent from messages 
+                WHERE  id_conversation = '""" + chat_id + """' 
+                order by id desc limit 5
+        ) tmp order by tmp.id asc
         
         """)
         rezultat = cursor.fetchall()
@@ -191,7 +209,7 @@ def LoadMessages(request, chat_id):
                 klase[2] = "sender"
 
             site += """
-            <br />
+            
             <div class="row message-body" id='""" + str(id_poruke) + """'>
               <div class="col-sm-12 """ + klase[0] + """">
                 <div class="heading-avatar-icon """ + klase[1] + """">
