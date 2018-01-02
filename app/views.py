@@ -46,3 +46,4 @@ def register(request):
     }
     return render(request, 'main/register.html', context)
 
+# User._meta.get_field('email')._unique = True
