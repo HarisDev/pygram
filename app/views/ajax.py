@@ -160,7 +160,8 @@ def LoadMessages(request, chat_id):
           
         FROM messages
         WHERE id_conversation = '""" + chat_id + """' 
-        ORDER BY time_sent
+        ORDER BY id DESC LIMIT 5
+        
         """)
         rezultat = cursor.fetchall()
         site = ""
@@ -216,7 +217,8 @@ def GetNewMessages(request, chat_id, last_id):
           
         FROM messages
         WHERE id_conversation = '""" + chat_id + """' and id > '""" + last_id + """' 
-        ORDER BY time_sent
+        ORDER BY time_sent 
+        
         """)
         rezultat = cursor.fetchall()
         site = ""

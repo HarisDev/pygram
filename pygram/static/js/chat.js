@@ -50,12 +50,13 @@ chat = {
             success: function(response){
                 if(response != ""){
                     jQuery("#conversation").append(response).fadeIn();
+                    jQuery("#conversation").animate({ scrollTop: $("#conversation").prop("scrollHeight") }, 500);
                 }
 
             }
         });
 
-        setTimeout(callback,1000);
+        setTimeout(callback,500);
     },
 
     startChatListener : function(){
@@ -89,6 +90,7 @@ chat = {
             success: function(response){
                 jQuery(".chat-load").hide().html(response).fadeIn();
                 chat.loadMessages(id);
+                jQuery("#conversation").animate({ scrollTop: $("#conversation").prop("scrollHeight") }, 500);
             }
         });
     },
