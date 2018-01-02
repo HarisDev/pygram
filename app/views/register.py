@@ -9,6 +9,7 @@ def register(request):
 
     if request.user.is_authenticated():
         return HttpResponseRedirect("/chat")
+
     form = UserForm(request.POST or None)
     if form.is_valid():
         user = form.save(commit=False)
