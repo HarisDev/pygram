@@ -36,6 +36,9 @@ chat = {
 
     getMessages : function(callback){
         last_id = jQuery(".row.message-body").last().attr("id");
+        if(last_id == undefined){
+            last_id = "1"
+        }
         chat_id = jQuery(".chathead").attr("id");
         jQuery.ajax({
             method: "POST",

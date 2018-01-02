@@ -10,11 +10,5 @@
       <user-name>pygramclient</user-name>
       <introspection-schemas>*:pygram</introspection-schemas>
     </data-source>
-    <data-source name="postgre heroku" uuid="9a17b315-92bc-4582-ad6f-5941ce88eff4">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
-      <secret-storage>master_key</secret-storage>
-      <first-sync>true</first-sync>
-      <user-name>lqnzwhhupyxyut</user-name>
-    </data-source>
   </component>
 </project>

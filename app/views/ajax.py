@@ -192,6 +192,7 @@ def LoadMessages(request, chat_id):
     return HttpResponse(site)
 
 def GetNewMessages(request, chat_id, last_id):
+
     with connection.cursor() as cursor:
         cursor.execute("""
         SELECT
