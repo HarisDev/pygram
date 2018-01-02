@@ -40,8 +40,8 @@ def LoadConversations(request):
 
     with connection.cursor() as cursor:
         cursor.execute("""
-        SELECT a1.id, a1.username, a1.first_name, a1.last_name FROM 
-          ( SELECT 
+        SELECT sub.id, a1.username, a1.first_name, a1.last_name FROM 
+          ( SELECT id,
             CASE WHEN c.id_first = '""" + str(logged_in) + """"' THEN id_second
                  WHEN c.id_second = '""" + str(logged_in) + """"' THEN id_first
             END AS other_id
@@ -89,8 +89,22 @@ def LoadChat(request, chat_id):
 
     logged_in = request.user.id
 
+    with connection.cursor() as cursor:
+        cursor.execute("""
+        SELECT sub.other_id FROM 
+          ( SELECT id,
+            CASE WHEN c.id_first = '""" + str(logged_in) + """"' THEN id_second
+                 WHEN c.id_second = '""" + str(logged_in) + """"' THEN id_first
+            END AS other_id
+            FROM conversations as c
+            WHERE id = '""" + chat_id + """'
+          ) sub
+        JOIN auth_user a1 ON a1.id = sub.other_id
+        """)
+        rezultat = cursor.fetchone()
+
     try:
-        other_user = User.objects.get(id=chat_id)
+        other_user = User.objects.get(id=rezultat[0])
     except  User.DoesNotExist:
         print("No user")
 
