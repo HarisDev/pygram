@@ -15,7 +15,7 @@ def chat(request):
             CASE WHEN c.id_first = '""" + str(logged_in) + """"' THEN id_second
                  WHEN c.id_second = '""" + str(logged_in) + """"' THEN id_first
             END AS other_id
-            FROM pygram.friends as c
+            FROM friends as c
             WHERE c.accepted = '1'
           ) sub
         JOIN auth_user a1 ON a1.id = sub.other_id
