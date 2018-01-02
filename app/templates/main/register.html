@@ -8,7 +8,7 @@
     .helptext { display:none; }
     .register table th { width:165px; }
     </style>
-    {% debug %}
+    <pre style=" background:black; text-align:left;">{% debug %}</pre>
     <form method="post" class="register" action=".">{% csrf_token %}
         <table border="0">
             {{ form.as_table }}
