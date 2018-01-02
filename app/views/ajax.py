@@ -8,6 +8,7 @@ from app.functions import *
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.utils.dateformat import format
 import datetime
+import pytz
 
 
 @login_required
@@ -156,7 +157,8 @@ def LoadMessages(request, chat_id):
         SELECT
           messages.id,
           messages.message,
-          messages.id_sender
+          messages.id_sender,
+          messages.time_sent
           
         FROM messages
         WHERE id_conversation = '""" + chat_id + """' 
@@ -170,6 +172,9 @@ def LoadMessages(request, chat_id):
             id_poruke = red[0]
             poruka = red[1]
             id_sender = red[2]
+            time_sent = red[3]
+            tz = pytz.timezone("Europe/Sarajevo")
+            time_fixed = str(datetime.datetime.fromtimestamp(time_sent, tz).strftime("%-H:%M"))
             klase = ["", "", ""]
 
             if id_sender != request.user.id:
@@ -197,7 +202,7 @@ def LoadMessages(request, chat_id):
                    """ + poruka + """
                   </div>
                   <span class="message-time pull-right">
-                    Sun
+                    """ + time_fixed + """
                   </span>
                 </div>
               </div>
@@ -213,7 +218,8 @@ def GetNewMessages(request, chat_id, last_id):
         SELECT
           messages.id,
           messages.message,
-          messages.id_sender
+          messages.id_sender,
+          messages.time_sent
           
         FROM messages
         WHERE id_conversation = '""" + chat_id + """' and id > '""" + last_id + """' 
@@ -228,6 +234,9 @@ def GetNewMessages(request, chat_id, last_id):
                 id_poruke = red[0]
                 poruka = red[1]
                 id_sender = red[2]
+                time_sent = red[3]
+                tz = pytz.timezone("Europe/Sarajevo")
+                time_fixed = str(datetime.datetime.fromtimestamp(time_sent, tz).strftime("%-H:%M"))
                 klase = ["", "", ""]
 
                 if id_sender != request.user.id:
@@ -244,7 +253,7 @@ def GetNewMessages(request, chat_id, last_id):
                     klase[2] = "sender"
 
                 site += """
-                <br />
+                
                 <div class="row message-body" id='""" + str(id_poruke) + """'>
                   <div class="col-sm-12 """ + klase[0] + """">
                     <div class="heading-avatar-icon """ + klase[1] + """">
@@ -255,7 +264,7 @@ def GetNewMessages(request, chat_id, last_id):
                        """ + poruka + """
                       </div>
                       <span class="message-time pull-right">
-                        Sun
+                        """ + time_fixed + """
                       </span>
                     </div>
                   </div>
