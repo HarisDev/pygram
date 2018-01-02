@@ -17,15 +17,18 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from app.views import *
 
+
 urlpatterns = [
     url(r'^', include('app.urls')),
-    url(r'^admin/', admin.site.urls),
     url(r'^chat/$', chat, name='chat'),
-    url(r'^settings/$', settings, name='settings'),
+    #url(r'^settings/$', settings, name='settings'),
     url(r'^friends/$', friends, name='friends'),
 
     url(r'^ajax/sendmessage/$', SendMessage, name='SendMessage'),
     url(r'^ajax/loadconversations/$', LoadConversations, name='LoadConversations'),
+    url(r'^ajax/loadchat/(?P<chat_id>\d+)$', LoadChat, name='LoadChat'),
+    url(r'^ajax/loadmessages/(?P<chat_id>\d+)$', LoadMessages, name='LoadMessages'),
+    url(r'^ajax/getnewmessages/(?P<chat_id>\d+)/(?P<last_id>\d+)$', GetNewMessages, name='GetNewMessages'),
 
 
 ]

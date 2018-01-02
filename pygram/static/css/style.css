@@ -447,7 +447,7 @@ body {
   padding: 2px 5px !important;
 }
 
-.reply-main textarea {
+.reply-main input {
   width: 100%;
   resize: none;
   overflow: hidden;
@@ -460,7 +460,7 @@ body {
   font-size: 16px;
 }
 
-.reply-main textarea:focus {
+.reply-main input:focus {
   outline: none;
   border: none;
   text-indent: 5px;
@@ -564,7 +564,7 @@ body {
   .reply-main {
     padding: 2px 8px !important;
   }
-  .reply-main textarea {
+  .reply-main input {
     padding: 8px !important;
     font-size: 18px;
   }
