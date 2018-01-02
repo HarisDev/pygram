@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'pygram'
+    'pygram',
+    'reset_migrations'
 ]
 
 MIDDLEWARE = [
