@@ -2,8 +2,9 @@
 jQuery(document).ready(function(){
     chat.init();
 });
-
+var ucitavanje;
 chat = {
+
     init : function (){
         this.loadConversations();
         this.addEnterListener();
@@ -56,7 +57,7 @@ chat = {
             }
         });
 
-        setTimeout(callback,500);
+         ucitavanje = setTimeout(callback,500);
     },
 
     startChatListener : function(){
@@ -80,12 +81,14 @@ chat = {
     },
 
     openChat : function(id){
+        clearTimeout(ucitavanje);
         jQuery.ajax({
             method: "POST",
             url: "/ajax/loadchat/" + id,
             csrfmiddlewaretoken: window.CSRF_TOKEN,
             beforeSend: function(xhr, settings) {
                 xhr.setRequestHeader("X-CSRFToken", window.CSRF_TOKEN);
+                jQuery(".chat-load").html(' ');
             },
             success: function(response){
                 jQuery(".chat-load").hide().html(response).fadeIn();

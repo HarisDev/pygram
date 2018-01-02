@@ -217,7 +217,7 @@ def GetNewMessages(request, chat_id, last_id):
           
         FROM messages
         WHERE id_conversation = '""" + chat_id + """' and id > '""" + last_id + """' 
-        ORDER BY time_sent 
+        ORDER BY id 
         
         """)
         rezultat = cursor.fetchall()
