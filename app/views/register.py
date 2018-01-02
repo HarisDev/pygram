@@ -7,9 +7,6 @@ from app.forms import UserForm
 
 def register(request):
 
-    if request.user.is_authenticated():
-        return HttpResponseRedirect("/chat")
-
     form = UserForm(request.POST or None)
     if form.is_valid():
         user = form.save(commit=False)
@@ -21,7 +18,7 @@ def register(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'main/chat.html')
+                return HttpResponseRedirect("/chat")
     context = {
         "form": form,
     }
