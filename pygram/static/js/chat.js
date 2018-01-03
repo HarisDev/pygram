@@ -109,12 +109,13 @@ chat = {
                     jQuery("#conversation").append(response).fadeIn();
                     jQuery("#conversation").animate({ scrollTop: $("#conversation").prop("scrollHeight") }, 500);
                 }
+                ucitavanje = setTimeout(callback,500);
                 chat.loadConversations();
 
             }
         });
 
-         ucitavanje = setTimeout(callback,500);
+
     },
 
     startChatListener : function(){

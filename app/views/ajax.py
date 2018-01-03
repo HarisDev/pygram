@@ -159,20 +159,36 @@ def LoadChat(request, chat_id):
         JOIN auth_user a1 ON a1.id = sub.other_id
         """)
         rezultat = cursor.fetchone()
-
+    other_id = rezultat[0]
     try:
-        other_user = User.objects.get(id=rezultat[0])
+        other_user = User.objects.get(id=other_id)
     except  User.DoesNotExist:
         print("No user")
+
+    with connection.cursor() as cx:
+        cx.execute("""
+            SELECT last_seen FROM auth_user WHERE id = '""" + str(other_id) + """'
+        """)
+        fetch = cx.fetchone()
+        lastseen = fetch[0]
 
     username = other_user.username
     first_name = other_user.first_name
     last_name = other_user.last_name
     display_name = returnName(first_name, last_name, username)
+    lasttimestamp = lastseen
 
     ispis = ""
 
     # Zaglavlje chat usera
+
+    if ofonline(other_id) == True:
+        status = """<i style="color:green;" class="fa fa-circle " aria-hidden="true"></i> <span style="color:green" >Online</span>"""
+        lastactive = "Active now"
+    else:
+        status = """<i style="color:grey;" class="fa fa-circle " aria-hidden="true"></i> <span style="color:grey" >Offline</span>"""
+        timestamp_string = int(format(datetime.datetime.now(), u'U'))-int(lasttimestamp)
+        lastactive = "Active " + seen_before(timestamp_string) + " ago"
 
     ispis += """
     <div class="row heading chathead" id='""" + chat_id + """'>
@@ -182,11 +198,13 @@ def LoadChat(request, chat_id):
               </div>
             </div>
             <div class="col-sm-8 col-xs-7 heading-name">
-              <a class="heading-name-meta">""" + display_name + """
+              <a class="heading-name-meta">""" + display_name + """<br />
               </a>
+              <small>&nbsp; """ + lastactive + """</small>
+              
             </div>
             <div class="col-sm-1 col-xs-1  heading-dot pull-right">
-              <i class="fa fa-circle " aria-hidden="true"></i> Online
+              """ + status + """
             </div>
           </div>
     """

@@ -30,4 +30,12 @@ def ofonline(userid):
     else:
         return False
 
+def seen_before(timestamp):
+
+    if timestamp <= 3600:
+        return str(int(timestamp/60)) + "m"
+    elif timestamp > 3600 and timestamp < 86400:
+        return str(int(timestamp/3600)) + "h"
+    else:
+        return "none"
 
