@@ -39,9 +39,20 @@ def LoadConversations(request):
 
     logged_in = request.user.id
 
+    timestamp_string = str(format(datetime.datetime.now(), u'U'))
+    with connection.cursor() as c1:
+        c1.execute(
+            """
+                UPDATE auth_user SET last_seen = '""" + str(timestamp_string)  + """'
+                WHERE id = '""" + str(logged_in) + """' and
+                last_seen+60 < '""" + str(timestamp_string) + """'
+            """
+        )
+    c1.close()
+
     with connection.cursor() as cursor:
         cursor.execute("""
-        SELECT sub.id, a1.username, a1.first_name, a1.last_name FROM 
+        SELECT sub.id, a1.username, a1.first_name, a1.last_name, a1.id FROM 
           ( SELECT id,
             CASE WHEN c.id_first = '""" + str(logged_in) + """"' THEN id_second
                  WHEN c.id_second = '""" + str(logged_in) + """"' THEN id_first
@@ -53,8 +64,14 @@ def LoadConversations(request):
         rezultat = cursor.fetchall()
         site = ""
         for red in rezultat:
-            ofonline = "avatar-online"
+
             id = red[0]
+
+            if ofonline(red[4]) == True:
+                ofonlinex = "avatar-online"
+            else:
+                ofonlinex = "avatar-offline"
+
             username = red[1]
             first_name = red[2]
             last_name = red[3]
@@ -100,7 +117,7 @@ def LoadConversations(request):
                         <div class="col-sm-3 col-xs-3 sideBar-avatar">
                           <div class="avatar-icon">
                           """ + count + """
-                          <div class='""" + ofonline + """'>&nbsp;</div>
+                          <div class='""" + ofonlinex + """'>&nbsp;</div>
                             <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
                           </div>
                         </div>
