@@ -88,13 +88,15 @@ def LoadConversations(request):
                 if not fetchx or fetchx[0] == 0:
                     # do nothing
                     count = ""
+                    unreadmsg = ""
                 else:
+                    unreadmsg = "unread-msg"
                     count = "<div class='unread'>" + str(fetchx[0]) + "</div>"
 
             cursor2.close()
 
             site += """
-            <div onClick="chat.openChat('""" + str(id) + """');" class="row sideBar-body">
+            <div onClick="chat.openChat('""" + str(id) + """');" class="row sideBar-body """ + unreadmsg + """ ">
                         <div class="col-sm-3 col-xs-3 sideBar-avatar">
                           <div class="avatar-icon">
                           """ + count + """
@@ -197,7 +199,7 @@ def LoadMessages(request, chat_id):
     with connection.cursor() as cursorx:
         cursorx.execute("""
             UPDATE messages SET aread = '1' 
-            WHERE id = '""" + str(chat_id) + """' and
+            WHERE id_conversation = '""" + str(chat_id) + """' and
             id_sender != '""" + str(request.user.id) + """'
         """)
     cursorx.close()
@@ -224,7 +226,7 @@ def LoadMessages(request, chat_id):
                 <center>
                     <br />
                     <br />
-                    <img width="84" src=\"""" + static('images/waving-hand.png') +  """\" /><br />
+                    <img width="64" src=\"""" + static('images/waving-hand.png') +  """\" /><br />
                   <br />
                   <span style="color: #A1A1A1; font-family: 'Ubuntu', sans-serif;">There are no messages. Say hello!</span>
                 </center>
@@ -278,7 +280,7 @@ def GetNewMessages(request, chat_id, last_id):
     with connection.cursor() as cursorx:
         cursorx.execute("""
             UPDATE messages SET aread = '1' 
-            WHERE id = '""" + str(chat_id) + """' and
+            WHERE id_conversation = '""" + str(chat_id) + """' and
             id_sender != '""" + str(request.user.id) + """' and
             aread = '0'
         """)

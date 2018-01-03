@@ -323,6 +323,9 @@ body {
   height: auto;
   width: 100%;
 }
+.unread-msg {
+  background: rgba(255, 10, 15, 0.04);
+}
 .unread {
   width: 21px;
   height: 21px;

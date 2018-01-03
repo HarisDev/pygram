@@ -166,6 +166,7 @@ chat = {
             success: function(response){
                 jQuery("#conversation").hide().html(response).fadeIn();
                 chat.startChatListener();
+                chat.loadConversations();
             }
         });
     }
