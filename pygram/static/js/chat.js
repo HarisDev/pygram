@@ -107,9 +107,9 @@ chat = {
             success: function(response){
                 if(response != ""){
                     jQuery("#conversation").append(response).fadeIn();
-                    chat.loadConversations();
                     jQuery("#conversation").animate({ scrollTop: $("#conversation").prop("scrollHeight") }, 500);
                 }
+                chat.loadConversations();
 
             }
         });
