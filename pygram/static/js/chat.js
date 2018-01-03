@@ -92,7 +92,6 @@ chat = {
 
     getMessages : function(callback){
         last_id = jQuery(".row.message-body").last().attr("id");
-        console.log(last_id);
         if(last_id == undefined){
             last_id = "1"
         }
