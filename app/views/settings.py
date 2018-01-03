@@ -1,5 +1,5 @@
 from django.shortcuts import render
 
-def settings(request):
+def Settings(request):
 
     return render(request, 'main/settings.html')

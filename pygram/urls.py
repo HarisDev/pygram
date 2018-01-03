@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^chat/$', chat, name='chat'),
     #url(r'^settings/$', settings, name='settings'),
     url(r'^friends/$', friends, name='friends'),
+    url(r'^settings/$', Settings, name='Settings'),
 
     url(r'^ajax/sendmessage/$', SendMessage, name='SendMessage'),
     url(r'^ajax/loadconversations/$', LoadConversations, name='LoadConversations'),
