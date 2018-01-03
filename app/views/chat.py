@@ -26,13 +26,27 @@ def chat(request):
         for red in rezultat:
 
             id = red[0]
+
+            with connection.cursor() as cursor1:
+                cursor1.execute("""
+                SELECT id FROM conversations WHERE
+                (id_first = '""" + str(id) + """"' or id_first = '""" + str(logged_in) + """"') 
+                and (id_second = '""" + str(id) + """"' or id_second = '""" + str(logged_in) + """"')
+                """)
+                rez = cursor1.fetchone()
+                if not rez:
+                    jsfunction = "chat.createConversation('" + str(id) + "');"
+                else:
+                    jsfunction = "chat.openChat('" + str(rez[0]) + "');"
+
+            cursor1.close()
             username = red[1]
             first_name = red[2]
             last_name = red[3]
             display_name = returnName(first_name, last_name, username)
 
             friends_list += """
-            <div class="row sideBar-body">
+            <div class="row sideBar-body" onClick=\"""" + jsfunction +  """\">
                         <div class="col-sm-3 col-xs-3 sideBar-avatar">
                           <div class="avatar-icon">
                             <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
@@ -46,7 +60,7 @@ def chat(request):
                             </span>
                             </div>
                             <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
-                              <span class="time-meta pull-right">18:18
+                              <span class="time-meta pull-right">
                             </span>
                             </div>
                           </div>

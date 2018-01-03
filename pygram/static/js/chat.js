@@ -38,6 +38,21 @@ chat = {
         })
     },
 
+    createConversation : function(id){
+        jQuery.ajax({
+            method: "POST",
+            url: "/ajax/createconversation/" + id,
+            csrfmiddlewaretoken: window.CSRF_TOKEN,
+            beforeSend: function(xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", window.CSRF_TOKEN);
+            },
+            success: function(response){
+                chat.loadConversations();
+                chat.openChat(response);
+            }
+        });
+    },
+
     setTabTitle : function(){
         jQuery(window).on("blur focus", function(e) {
             var prevType = $(this).data("prevType");

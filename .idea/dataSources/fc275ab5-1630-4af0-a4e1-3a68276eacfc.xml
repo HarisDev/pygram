@@ -944,6 +944,7 @@
     </table>
     <table id="241" parent="8" name="messages">
       <Engine>InnoDB</Engine>
+      <Collation>utf8mb4_bin</Collation>
     </table>
     <column id="242" parent="228" name="id">
       <Position>1</Position>
@@ -1136,407 +1137,411 @@ codename</ColNames>
       <ColNames>username</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="276" parent="231" name="auth_user_email_1c89df09_uniq">
-      <ColNames>email</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <key id="277" parent="231" name="PRIMARY">
+    <key id="276" parent="231" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="278" parent="231" name="username">
+    <key id="277" parent="231" name="username">
       <ColNames>username</ColNames>
       <UnderlyingIndexName>username</UnderlyingIndexName>
     </key>
-    <key id="279" parent="231" name="auth_user_email_1c89df09_uniq">
-      <ColNames>email</ColNames>
-      <UnderlyingIndexName>auth_user_email_1c89df09_uniq</UnderlyingIndexName>
-    </key>
-    <column id="280" parent="232" name="id">
+    <column id="278" parent="232" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="281" parent="232" name="user_id">
+    <column id="279" parent="232" name="user_id">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="282" parent="232" name="group_id">
+    <column id="280" parent="232" name="group_id">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="283" parent="232" name="auth_user_groups_user_id_group_id_94350c0c_uniq">
+    <index id="281" parent="232" name="auth_user_groups_user_id_group_id_94350c0c_uniq">
       <ColNames>user_id
 group_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="284" parent="232" name="auth_user_groups_group_id_97559544_fk_auth_group_id">
+    <index id="282" parent="232" name="auth_user_groups_group_id_97559544_fk_auth_group_id">
       <ColNames>group_id</ColNames>
     </index>
-    <key id="285" parent="232" name="PRIMARY">
+    <key id="283" parent="232" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="286" parent="232" name="auth_user_groups_user_id_group_id_94350c0c_uniq">
+    <key id="284" parent="232" name="auth_user_groups_user_id_group_id_94350c0c_uniq">
       <ColNames>user_id
 group_id</ColNames>
       <UnderlyingIndexName>auth_user_groups_user_id_group_id_94350c0c_uniq</UnderlyingIndexName>
     </key>
-    <foreign-key id="287" parent="232" name="auth_user_groups_user_id_6a12ed8b_fk_auth_user_id">
+    <foreign-key id="285" parent="232" name="auth_user_groups_user_id_6a12ed8b_fk_auth_user_id">
       <ColNames>user_id</ColNames>
       <RefSchemaName>pygram</RefSchemaName>
       <RefTableName>auth_user</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="288" parent="232" name="auth_user_groups_group_id_97559544_fk_auth_group_id">
+    <foreign-key id="286" parent="232" name="auth_user_groups_group_id_97559544_fk_auth_group_id">
       <ColNames>group_id</ColNames>
       <RefSchemaName>pygram</RefSchemaName>
       <RefTableName>auth_group</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="289" parent="233" name="id">
+    <column id="287" parent="233" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="290" parent="233" name="user_id">
+    <column id="288" parent="233" name="user_id">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="291" parent="233" name="permission_id">
+    <column id="289" parent="233" name="permission_id">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="292" parent="233" name="auth_user_user_permissions_user_id_permission_id_14a6b632_uniq">
+    <index id="290" parent="233" name="auth_user_user_permissions_user_id_permission_id_14a6b632_uniq">
       <ColNames>user_id
 permission_id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="293" parent="233" name="auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm">
+    <index id="291" parent="233" name="auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm">
       <ColNames>permission_id</ColNames>
     </index>
-    <key id="294" parent="233" name="PRIMARY">
+    <key id="292" parent="233" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="295" parent="233" name="auth_user_user_permissions_user_id_permission_id_14a6b632_uniq">
+    <key id="293" parent="233" name="auth_user_user_permissions_user_id_permission_id_14a6b632_uniq">
       <ColNames>user_id
 permission_id</ColNames>
       <UnderlyingIndexName>auth_user_user_permissions_user_id_permission_id_14a6b632_uniq</UnderlyingIndexName>
     </key>
-    <foreign-key id="296" parent="233" name="auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id">
+    <foreign-key id="294" parent="233" name="auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id">
       <ColNames>user_id</ColNames>
       <RefSchemaName>pygram</RefSchemaName>
       <RefTableName>auth_user</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="297" parent="233" name="auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm">
+    <foreign-key id="295" parent="233" name="auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm">
       <ColNames>permission_id</ColNames>
       <RefSchemaName>pygram</RefSchemaName>
       <RefTableName>auth_permission</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="298" parent="234" name="id">
+    <column id="296" parent="234" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="299" parent="234" name="id_first">
+    <column id="297" parent="234" name="id_first">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="300" parent="234" name="id_second">
+    <column id="298" parent="234" name="id_second">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="301" parent="234" name="time_started">
+    <column id="299" parent="234" name="time_started">
       <Position>4</Position>
       <DataType>int(50)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="302" parent="234" name="PRIMARY">
+    <key id="300" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="303" parent="235" name="id">
+    <column id="301" parent="235" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="304" parent="235" name="action_time">
+    <column id="302" parent="235" name="action_time">
       <Position>2</Position>
       <DataType>datetime(6)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="305" parent="235" name="object_id">
+    <column id="303" parent="235" name="object_id">
       <Position>3</Position>
       <DataType>longtext|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="306" parent="235" name="object_repr">
+    <column id="304" parent="235" name="object_repr">
       <Position>4</Position>
       <DataType>varchar(200)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="307" parent="235" name="action_flag">
+    <column id="305" parent="235" name="action_flag">
       <Position>5</Position>
       <DataType>smallint(5) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="308" parent="235" name="change_message">
+    <column id="306" parent="235" name="change_message">
       <Position>6</Position>
       <DataType>longtext|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="309" parent="235" name="content_type_id">
+    <column id="307" parent="235" name="content_type_id">
       <Position>7</Position>
       <DataType>int(11)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="310" parent="235" name="user_id">
+    <column id="308" parent="235" name="user_id">
       <Position>8</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="311" parent="235" name="django_admin_log_content_type_id_c4bce8eb_fk_django_co">
+    <index id="309" parent="235" name="django_admin_log_content_type_id_c4bce8eb_fk_django_co">
       <ColNames>content_type_id</ColNames>
     </index>
-    <index id="312" parent="235" name="django_admin_log_user_id_c564eba6_fk_auth_user_id">
+    <index id="310" parent="235" name="django_admin_log_user_id_c564eba6_fk_auth_user_id">
       <ColNames>user_id</ColNames>
     </index>
-    <key id="313" parent="235" name="PRIMARY">
+    <key id="311" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="314" parent="235" name="django_admin_log_content_type_id_c4bce8eb_fk_django_co">
+    <foreign-key id="312" parent="235" name="django_admin_log_content_type_id_c4bce8eb_fk_django_co">
       <ColNames>content_type_id</ColNames>
       <RefSchemaName>pygram</RefSchemaName>
       <RefTableName>django_content_type</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="315" parent="235" name="django_admin_log_user_id_c564eba6_fk_auth_user_id">
+    <foreign-key id="313" parent="235" name="django_admin_log_user_id_c564eba6_fk_auth_user_id">
       <ColNames>user_id</ColNames>
       <RefSchemaName>pygram</RefSchemaName>
       <RefTableName>auth_user</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="316" parent="236" name="id">
+    <column id="314" parent="236" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="317" parent="236" name="app_label">
+    <column id="315" parent="236" name="app_label">
       <Position>2</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="318" parent="236" name="model">
+    <column id="316" parent="236" name="model">
       <Position>3</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="319" parent="236" name="django_content_type_app_label_model_76bd3d3b_uniq">
+    <index id="317" parent="236" name="django_content_type_app_label_model_76bd3d3b_uniq">
       <ColNames>app_label
 model</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="320" parent="236" name="PRIMARY">
+    <key id="318" parent="236" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="321" parent="236" name="django_content_type_app_label_model_76bd3d3b_uniq">
+    <key id="319" parent="236" name="django_content_type_app_label_model_76bd3d3b_uniq">
       <ColNames>app_label
 model</ColNames>
       <UnderlyingIndexName>django_content_type_app_label_model_76bd3d3b_uniq</UnderlyingIndexName>
     </key>
-    <column id="322" parent="237" name="id">
+    <column id="320" parent="237" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="323" parent="237" name="app">
+    <column id="321" parent="237" name="app">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="324" parent="237" name="name">
+    <column id="322" parent="237" name="name">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="325" parent="237" name="applied">
+    <column id="323" parent="237" name="applied">
       <Position>4</Position>
       <DataType>datetime(6)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="326" parent="237" name="PRIMARY">
+    <key id="324" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="327" parent="238" name="session_key">
+    <column id="325" parent="238" name="session_key">
       <Position>1</Position>
       <DataType>varchar(40)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="328" parent="238" name="session_data">
+    <column id="326" parent="238" name="session_data">
       <Position>2</Position>
       <DataType>longtext|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="329" parent="238" name="expire_date">
+    <column id="327" parent="238" name="expire_date">
       <Position>3</Position>
       <DataType>datetime(6)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="330" parent="238" name="django_session_expire_date_a5c62663">
+    <index id="328" parent="238" name="django_session_expire_date_a5c62663">
       <ColNames>expire_date</ColNames>
     </index>
-    <key id="331" parent="238" name="PRIMARY">
+    <key id="329" parent="238" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>session_key</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="332" parent="239" name="id">
+    <column id="330" parent="239" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="333" parent="239" name="domain">
+    <column id="331" parent="239" name="domain">
       <Position>2</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="334" parent="239" name="name">
+    <column id="332" parent="239" name="name">
       <Position>3</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="335" parent="239" name="django_site_domain_a2e37b91_uniq">
+    <index id="333" parent="239" name="django_site_domain_a2e37b91_uniq">
       <ColNames>domain</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="336" parent="239" name="PRIMARY">
+    <key id="334" parent="239" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="337" parent="239" name="django_site_domain_a2e37b91_uniq">
+    <key id="335" parent="239" name="django_site_domain_a2e37b91_uniq">
       <ColNames>domain</ColNames>
       <UnderlyingIndexName>django_site_domain_a2e37b91_uniq</UnderlyingIndexName>
     </key>
-    <column id="338" parent="240" name="id">
+    <column id="336" parent="240" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="339" parent="240" name="id_first">
+    <column id="337" parent="240" name="id_first">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="340" parent="240" name="id_second">
+    <column id="338" parent="240" name="id_second">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="341" parent="240" name="time_sent">
+    <column id="339" parent="240" name="time_sent">
       <Position>4</Position>
       <DataType>int(50)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="342" parent="240" name="accepted">
+    <column id="340" parent="240" name="accepted">
       <Position>5</Position>
       <DataType>int(5)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="343" parent="240" name="PRIMARY">
+    <key id="341" parent="240" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="344" parent="241" name="id">
+    <column id="342" parent="241" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="345" parent="241" name="id_conversation">
+    <column id="343" parent="241" name="id_conversation">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="346" parent="241" name="id_sender">
+    <column id="344" parent="241" name="id_sender">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="347" parent="241" name="message">
+    <column id="345" parent="241" name="message">
       <Position>4</Position>
       <DataType>text|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="348" parent="241" name="time_sent">
+    <column id="346" parent="241" name="time_sent">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="347" parent="241" name="aread">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="348" parent="241" name="seen">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <key id="349" parent="241" name="PRIMARY">

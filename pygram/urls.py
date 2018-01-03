@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^ajax/loadconversations/$', LoadConversations, name='LoadConversations'),
     url(r'^ajax/loadchat/(?P<chat_id>\d+)$', LoadChat, name='LoadChat'),
     url(r'^ajax/loadmessages/(?P<chat_id>\d+)$', LoadMessages, name='LoadMessages'),
+    url(r'^ajax/createconversation/(?P<receiver_id>\d+)$', CreateConversation, name='CreateConversation'),
     url(r'^ajax/getnewmessages/(?P<chat_id>\d+)/(?P<last_id>\d+)$', GetNewMessages, name='GetNewMessages'),
 
 

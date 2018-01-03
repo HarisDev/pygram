@@ -78,10 +78,26 @@ def LoadConversations(request):
 
             cursor1.close()
 
+            with connection.cursor() as cursor2:
+                cursor2.execute("""
+                    SELECT COUNT(*) FROM messages WHERE id_conversation = '""" + str(id) + """' 
+                    and id_sender != '""" + str(logged_in) + """' and aread = '0'
+                """)
+                fetchx = cursor2.fetchone()
+
+                if not fetchx or fetchx[0] == 0:
+                    # do nothing
+                    count = ""
+                else:
+                    count = "<div class='unread'>" + str(fetchx[0]) + "</div>"
+
+            cursor2.close()
+
             site += """
             <div onClick="chat.openChat('""" + str(id) + """');" class="row sideBar-body">
                         <div class="col-sm-3 col-xs-3 sideBar-avatar">
                           <div class="avatar-icon">
+                          """ + count + """
                           <div class='""" + ofonline + """'>&nbsp;</div>
                             <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
                           </div>
@@ -109,6 +125,7 @@ def LoadConversations(request):
 def LoadChat(request, chat_id):
 
     logged_in = request.user.id
+
 
     with connection.cursor() as cursor:
         cursor.execute("""
@@ -171,7 +188,20 @@ def LoadChat(request, chat_id):
     """
     return HttpResponse(ispis)
 
+
+
+
+
 def LoadMessages(request, chat_id):
+
+    with connection.cursor() as cursorx:
+        cursorx.execute("""
+            UPDATE messages SET aread = '1' 
+            WHERE id = '""" + str(chat_id) + """' and
+            id_sender != '""" + str(request.user.id) + """'
+        """)
+    cursorx.close()
+
     with connection.cursor() as cursor:
         cursor.execute("""
         
@@ -189,6 +219,16 @@ def LoadMessages(request, chat_id):
         """)
         rezultat = cursor.fetchall()
         site = ""
+        if not rezultat:
+            site += """
+                <center>
+                    <br />
+                    <br />
+                    <img width="84" src=\"""" + static('images/waving-hand.png') +  """\" /><br />
+                  <br />
+                  <span style="color: #A1A1A1; font-family: 'Ubuntu', sans-serif;">There are no messages. Say hello!</span>
+                </center>
+            """
         for red in rezultat:
 
             id_poruke = red[0]
@@ -234,6 +274,15 @@ def LoadMessages(request, chat_id):
     return HttpResponse(site)
 
 def GetNewMessages(request, chat_id, last_id):
+
+    with connection.cursor() as cursorx:
+        cursorx.execute("""
+            UPDATE messages SET aread = '1' 
+            WHERE id = '""" + str(chat_id) + """' and
+            id_sender != '""" + str(request.user.id) + """' and
+            aread = '0'
+        """)
+    cursorx.close()
 
     with connection.cursor() as cursor:
         cursor.execute("""
@@ -294,3 +343,18 @@ def GetNewMessages(request, chat_id, last_id):
 
         cursor.close();
     return HttpResponse(site)
+
+def CreateConversation(request, receiver_id):
+
+    logged_in = request.user.id
+    timestamp_string = str(format(datetime.datetime.now(), u'U'))
+
+    with connection.cursor() as cursor:
+
+        cursor.execute("""
+            INSERT INTO conversations (id_first, id_second, time_started) VALUES 
+            ('""" + str(logged_in) + """', '""" + str(receiver_id) + """', '""" + str(timestamp_string) + """')
+        """)
+        returnid = cursor.lastrowid
+
+    return HttpResponse(returnid)
