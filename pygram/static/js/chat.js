@@ -1,8 +1,28 @@
 
 jQuery(document).ready(function(){
     chat.init();
+
+    jQuery('#comment').emojiPicker({
+        width: '300px',
+        height: '200px',
+        button: false,
+        onShow: function(picker, settings, isActive) {
+            if(isActive == true){
+                /*setTimeout(function(){
+                    jQuery(".emojiPicker").css('cssText', 'top: 100px !important');
+                }, 500);*/
+            }
+
+        }
+    });
+
+    jQuery('.reply-emojis').click(function(e) {
+        e.preventDefault();
+        jQuery('#comment').emojiPicker('toggle');
+    });
 });
-var ucitavanje;
+
+var ucitavanje, newmsg = 0;
 chat = {
 
     init : function (){
@@ -15,6 +35,26 @@ chat = {
             if(e.which == 13){
                 chat.sendMessage();
             }
+        })
+    },
+
+    setTabTitle : function(){
+        jQuery(window).on("blur focus", function(e) {
+            var prevType = $(this).data("prevType");
+
+            if (prevType != e.type) {   //  reduce double fire issues
+                switch (e.type) {
+                    case "blur":
+                        document.title = "(" + newmsg + ") New Message!"
+                        break;
+                    case "focus":
+                        newmsg = 0;
+                        document.title = "Chat Module"
+                        break;
+                }
+            }
+
+            jQuery(this).data("prevType", e.type);
         })
     },
 
@@ -52,6 +92,7 @@ chat = {
             success: function(response){
                 if(response != ""){
                     jQuery("#conversation").append(response).fadeIn();
+                    chat.loadConversations();
                     jQuery("#conversation").animate({ scrollTop: $("#conversation").prop("scrollHeight") }, 500);
                 }
 

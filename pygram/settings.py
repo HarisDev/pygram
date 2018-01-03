@@ -90,6 +90,10 @@ DATABASES = {
         'PASSWORD': 'haris',
         'HOST': '89.36.218.144',
         'PORT': '3306',
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+            'use_unicode': True,
+        },
     }
 }
 

@@ -323,6 +323,24 @@ body {
   height: auto;
   width: 100%;
 }
+.avatar-offline {
+  width: 16px;
+  height: 16px;
+  margin: 35px 25px;
+  background: grey;
+  position: absolute;
+  border-radius: 50%;
+  border:solid 3px white;
+}
+.avatar-online {
+  width: 16px;
+  height: 16px;
+  margin: 35px 25px;
+  background: rgb(38, 189, 55);
+  position: absolute;
+  border-radius: 50%;
+  border:solid 3px white;
+}
 .previous {
   font-size: 15px;
   text-align: center;

@@ -53,7 +53,7 @@ def LoadConversations(request):
         rezultat = cursor.fetchall()
         site = ""
         for red in rezultat:
-
+            ofonline = "avatar-online"
             id = red[0]
             username = red[1]
             first_name = red[2]
@@ -62,7 +62,7 @@ def LoadConversations(request):
 
             with connection.cursor() as cursor1:
                 cursor1.execute("""
-                    SELECT message FROM messages WHERE id_conversation = '""" + str(id) + """' ORDER BY id DESC 
+                    SELECT message, time_sent FROM messages WHERE id_conversation = '""" + str(id) + """' ORDER BY id DESC 
                     LIMIT 1
                 """)
                 fetch = cursor1.fetchone()
@@ -70,8 +70,11 @@ def LoadConversations(request):
                 if not fetch:
                     # do nothing
                     lastmsg = ""
+                    datex = ""
                 else:
                     lastmsg = fetch[0]
+                    tz = pytz.timezone("Europe/Sarajevo")
+                    datex = str(datetime.datetime.fromtimestamp(fetch[1], tz).strftime("%-H:%M"))
 
             cursor1.close()
 
@@ -79,6 +82,7 @@ def LoadConversations(request):
             <div onClick="chat.openChat('""" + str(id) + """');" class="row sideBar-body">
                         <div class="col-sm-3 col-xs-3 sideBar-avatar">
                           <div class="avatar-icon">
+                          <div class='""" + ofonline + """'>&nbsp;</div>
                             <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
                           </div>
                         </div>
@@ -91,7 +95,7 @@ def LoadConversations(request):
                             </span>
                             </div>
                             <div class="col-sm-4 col-xs-4 pull-right sideBar-time">
-                              <span class="time-meta pull-right">18:18
+                              <span class="time-meta pull-right">""" + datex + """
                             </span>
                             </div>
                           </div>
