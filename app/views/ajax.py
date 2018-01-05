@@ -52,7 +52,7 @@ def LoadConversations(request):
 
     with connection.cursor() as cursor:
         cursor.execute("""
-        SELECT sub.id, a1.username, a1.first_name, a1.last_name, a1.id FROM 
+        SELECT sub.id, a1.username, a1.first_name, a1.last_name, a1.id, a1.avatar FROM 
           ( SELECT id,
             CASE WHEN c.id_first = '""" + str(logged_in) + """"' THEN id_second
                  WHEN c.id_second = '""" + str(logged_in) + """"' THEN id_first
@@ -66,6 +66,7 @@ def LoadConversations(request):
         for red in rezultat:
 
             id = red[0]
+            slika = str('/media/'+red[5])
 
             if ofonline(red[4]) == True:
                 ofonlinex = "avatar-online"
@@ -118,7 +119,7 @@ def LoadConversations(request):
                           <div class="avatar-icon">
                           """ + count + """
                           <div class='""" + ofonlinex + """'>&nbsp;</div>
-                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                            <img src='""" + slika + """"'>
                           </div>
                         </div>
                         <div class="col-sm-9 col-xs-9 sideBar-main">
