@@ -161,10 +161,8 @@ def LoadChat(request, chat_id):
         """)
         rezultat = cursor.fetchone()
     other_id = rezultat[0]
-    try:
-        other_user = User.objects.get(id=other_id)
-    except  User.DoesNotExist:
-        print("No user")
+    other_user = User.objects.get(id=other_id)
+
 
     with connection.cursor() as cx:
         cx.execute("""
@@ -277,12 +275,9 @@ def LoadMessages(request, chat_id):
             tz = pytz.timezone("Europe/Sarajevo")
             time_fixed = str(datetime.datetime.fromtimestamp(time_sent, tz).strftime("%H:%M"))
             klase = ["", "", ""]
-
+            other_user = User.objects.get(id=id_sender)
             if id_sender != request.user.id:
-                try:
-                    other_user = User.objects.get(id=id_sender)
-                except  User.DoesNotExist:
-                    print("No user")
+
                 klase[0] = "message-main-receiver"
                 klase[1] = "message-avatar"
                 klase[2] = "receiver"
@@ -294,7 +289,7 @@ def LoadMessages(request, chat_id):
             avatar  = str('/media/' + str(other_user.avatar))
 
             site += """
-            
+            <br />
             <div class="row message-body" id='""" + str(id_poruke) + """'>
               <div class="col-sm-12 """ + klase[0] + """">
                 <div class="heading-avatar-icon """ + klase[1] + """">
@@ -351,12 +346,10 @@ def GetNewMessages(request, chat_id, last_id):
                 time_fixed = str(datetime.datetime.fromtimestamp(time_sent, tz).strftime("%H:%M"))
                 klase = ["", "", ""]
                 avatar = ""
+                other_user = User.objects.get(id=id_sender)
+                avatar  = str('/media/'+str(other_user.avatar))
                 if id_sender != request.user.id:
-                    try:
-                        other_user = User.objects.get(id=id_sender)
-                        avatar  = str('/media/'+str(other_user.avatar))
-                    except  User.DoesNotExist:
-                        print("No user")
+
                     klase[0] = "message-main-receiver"
                     klase[1] = "message-avatar"
                     klase[2] = "receiver"
