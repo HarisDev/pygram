@@ -29,8 +29,19 @@ def friends(request):
             site+="<span class='ime'>"+red[2]+" "+red[3]+"</span>"
             site+="""</div>"""
             x+=1
+    cursor.close()
+    with connection.cursor() as c1:
+        c1.execute("""
+            select username, avatar from auth_user order by id desc limit 9
+        """)
+        korisnici=c1.fetchall()
+        lista=" "
+        for redx in korisnici:
+
+            lista += """<div class='  col-md-4  find'>"""
+            lista += """<img src="https://bootdey.com/img/Content/avatar/avatar1.png" /><br /> <br />  """
+            lista += "<span class='ime'>" + redx[0] + "</span>"
+            lista += """</div>"""
 
 
-    frend = "test"
-
-    return render(request, 'main/friends.html', {'varijabla': site})
+    return render(request, 'main/friends.html', {'varijabla': site,'lista': lista})
