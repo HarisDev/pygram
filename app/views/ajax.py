@@ -91,7 +91,7 @@ def LoadConversations(request):
                 else:
                     lastmsg = fetch[0]
                     tz = pytz.timezone("Europe/Sarajevo")
-                    datex = str(datetime.datetime.fromtimestamp(fetch[1], tz).strftime("%-H:%M"))
+                    datex = str(datetime.datetime.fromtimestamp(fetch[1], tz).strftime("%H:%M"))
 
             cursor1.close()
 
@@ -273,7 +273,7 @@ def LoadMessages(request, chat_id):
             id_sender = red[2]
             time_sent = red[3]
             tz = pytz.timezone("Europe/Sarajevo")
-            time_fixed = str(datetime.datetime.fromtimestamp(time_sent, tz).strftime("%-H:%M"))
+            time_fixed = str(datetime.datetime.fromtimestamp(time_sent, tz).strftime("%H:%M"))
             klase = ["", "", ""]
 
             if id_sender != request.user.id:
@@ -344,7 +344,7 @@ def GetNewMessages(request, chat_id, last_id):
                 id_sender = red[2]
                 time_sent = red[3]
                 tz = pytz.timezone("Europe/Sarajevo")
-                time_fixed = str(datetime.datetime.fromtimestamp(time_sent, tz).strftime("%-H:%M"))
+                time_fixed = str(datetime.datetime.fromtimestamp(time_sent, tz).strftime("%H:%M"))
                 klase = ["", "", ""]
 
                 if id_sender != request.user.id:

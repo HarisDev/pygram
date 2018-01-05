@@ -76,18 +76,22 @@ chat = {
     sendMessage : function(){
         message = jQuery("#comment");
         chat_id = jQuery(".chathead").attr("id");
-        jQuery.ajax({
-            method: "POST",
-            url: "/ajax/sendmessage/",
-            data: { "message": message.val(), "idconv": chat_id},
-            csrfmiddlewaretoken: window.CSRF_TOKEN,
-            beforeSend: function(xhr, settings) {
-                xhr.setRequestHeader("X-CSRFToken", window.CSRF_TOKEN);
-                jQuery("#comment").val('');
-            },
-            success: function(response){
-            }
-        });
+        if(message.val() == ""){
+
+        } else {
+            jQuery.ajax({
+                method: "POST",
+                url: "/ajax/sendmessage/",
+                data: {"message": message.val(), "idconv": chat_id},
+                csrfmiddlewaretoken: window.CSRF_TOKEN,
+                beforeSend: function (xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", window.CSRF_TOKEN);
+                    jQuery("#comment").val('');
+                },
+                success: function (response) {
+                }
+            });
+        }
     },
 
     getMessages : function(callback){
