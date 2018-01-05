@@ -9,12 +9,18 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
   font-weight: 300;
+  background: #764ba2;
+  background: -webkit-linear-gradient(top left, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);
 }
 body ::-webkit-input-placeholder {
   /* WebKit browsers */
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
   font-weight: 300;
+}
+.errorlist {
+  display:none;
 }
 body :-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
@@ -35,9 +41,9 @@ body :-ms-input-placeholder {
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
   font-weight: 300;
-}
+}/*
 .wrapper {
-  background: #764ba2;
+ /* background: #764ba2;
   background: -webkit-linear-gradient(top left, #667eea 0%, #764ba2 100%);
   background: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);
   position: absolute;
@@ -45,7 +51,8 @@ body :-ms-input-placeholder {
   width: 100%;
   height: 100%;
 
-}
+}*/
+
 .wrapper.form-success .container h1 {
   -webkit-transform: translateY(85px);
           transform: translateY(85px);
