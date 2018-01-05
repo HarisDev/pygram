@@ -350,6 +350,7 @@ body {
   border-radius: 50%;
   border: solid 2px white;
 }
+
 .unread {
   width: 21px;
   height: 21px;
@@ -436,6 +437,7 @@ body {
   font-size: 12px;
   word-wrap: break-word;
   font-family: sans-serif;
+  border: solid 1px rgb(233, 233, 233);
   display: inline-block;
 }
 .message-avatar {
@@ -451,6 +453,7 @@ body {
   padding: 4px 10px 7px !important;
   font-size: 12px;
   font-family: sans-serif;
+  border: solid 1px rgb(233, 233, 233);
   display: inline-block;
   word-wrap: break-word;
 }
