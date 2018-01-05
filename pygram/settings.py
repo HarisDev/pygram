@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'pygram'
+    'pygram',
+    'app'
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,8 @@ STATICFILES_DIRS = [
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+AUTH_USER_MODEL = 'app.User'
+
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'static/avatars')
+MEDIA_URL = '/media/'

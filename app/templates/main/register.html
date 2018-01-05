@@ -9,7 +9,7 @@
     .register table th { width:165px; }
     </style>
 
-    <form method="post" class="register" action=".">
+    <form method="post" class="register" action="." enctype="multipart/form-data">
         {% csrf_token %}
         <table border="0">
             {{ form.as_table }}

@@ -1,11 +1,14 @@
 from django import forms
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from .models import User
 
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
-    email = forms.EmailField(required=True  )
+    email = forms.EmailField(required=True)
+  #  avatar = forms.ImageField(required=False)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'first_name', 'last_name']
+        fields = ['username', 'email', 'password', 'first_name', 'last_name', 'avatar']
+

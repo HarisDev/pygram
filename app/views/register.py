@@ -7,7 +7,7 @@ from app.forms import UserForm
 
 def register(request):
 
-    form = UserForm(request.POST or None)
+    form = UserForm(request.POST or None, request.FILES)
     if form.is_valid():
         user = form.save(commit=False)
         username = form.cleaned_data['username']
