@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.db import connection
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import *
-from django.contrib.auth.models import User
 from app.functions import *
+from app.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.utils.dateformat import format
 import datetime
@@ -176,7 +176,7 @@ def LoadChat(request, chat_id):
     username = other_user.username
     first_name = other_user.first_name
     last_name = other_user.last_name
-    avatar  = str('/media/'+other_user.avatar)
+    avatar  = str('/media/'+str(other_user.avatar))
     display_name = returnName(first_name, last_name, username)
     lasttimestamp = lastseen
 
@@ -291,7 +291,7 @@ def LoadMessages(request, chat_id):
                 klase[1] = "hidden"
                 klase[2] = "sender"
 
-            avatar  = str('/media/' + other_user.avatar)
+            avatar  = str('/media/' + str(other_user.avatar))
 
             site += """
             
@@ -354,7 +354,7 @@ def GetNewMessages(request, chat_id, last_id):
                 if id_sender != request.user.id:
                     try:
                         other_user = User.objects.get(id=id_sender)
-                        avatar  = str('/media/'+other_user.avatar)
+                        avatar  = str('/media/'+str(other_user.avatar))
                     except  User.DoesNotExist:
                         print("No user")
                     klase[0] = "message-main-receiver"
