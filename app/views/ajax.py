@@ -291,7 +291,7 @@ def LoadMessages(request, chat_id):
                 klase[1] = "hidden"
                 klase[2] = "sender"
 
-            avatar  = str('/media/'other_user.avatar)
+            avatar  = str('/media/' + other_user.avatar)
 
             site += """
             
