@@ -33,16 +33,26 @@ def friends(request):
     cursor.close()
     with connection.cursor() as c1:
         c1.execute("""
-            select username, avatar from auth_user order by id desc limit 9
+            
+            SELECT sub.other_id, a1.username, a1.avatar FROM 
+              ( SELECT id,
+                CASE WHEN c.id_first = '""" + str(logged_in) + """"' THEN id_second
+                     WHEN c.id_second = '""" + str(logged_in) + """"' THEN id_first
+                END AS other_id
+                FROM friends as c
+                WHERE time_sent != '""" + str(logged_in) + """' and accepted = '0'
+              ) sub
+            JOIN auth_user a1 ON a1.id = sub.other_id
+            
         """)
         korisnici=c1.fetchall()
         lista=" "
         for redx in korisnici:
 
-            lista += """<div class='  col-md-4  find'>"""
-            lista += """<img src='/media/""" +  str(redx[1]) + """' /><br /> <br />  """
-            lista += "<span class='ime'>" + redx[0] + "</span>"
-            lista += """</div>"""
+            lista += """<div class='  col-md-12  find' id='request-""" + str(redx[0]) + """'>"""
+            lista += """<img src='/media/""" +  str(redx[2]) + """' style="float:left; margin-right: 25px; border-radius:50%;" />  """
+            lista += "<br /><span class='ime' style='color:white;margin-top:15px;'>" + redx[1] + "</span> <div class='request'><a style='background:rgb(48, 169, 33);' class='ime' href='javascript:;' onClick=\"friends.accept('" + str(redx[0]) + "')\">Accept</a> <a class='ime' style='background:rgba(255, 27, 49, 0.77);' href='javascript:;' onClick=\"friends.decline('" + str(redx[0]) + "')\">Decline</a></div>"
+            lista += """</div><br style="clear:both" /><br />"""
 
 
     return render(request, 'main/friends.html', {'varijabla': site,'lista': lista})

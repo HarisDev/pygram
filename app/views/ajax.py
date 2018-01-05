@@ -393,3 +393,70 @@ def CreateConversation(request, receiver_id):
         returnid = cursor.lastrowid
 
     return HttpResponse(returnid)
+
+def Search(request):
+    text = request.POST.get("text", "none")
+    site = ""
+    with connection.cursor() as c1:
+        c1.execute("""
+            SELECT id, username, avatar FROM auth_user WHERE username LIKE '%""" + str(text) + """%' or 
+            first_name LIKE '%""" + str(text) + """%' or last_name LIKE '%""" + str(text) + """%'
+        """)
+        redovi = c1.fetchall()
+
+        site += """<div class="row" >"""
+        for red in redovi:
+
+
+
+            site += """     <div style="margin-bottom:15px;" class="col-md-4" id=\"add-""" + str(red[0]) + """\">"""
+            site += """         <img style="width: 64px;margin-bottom:15px;" width="64" height="64" src=\"""" + '/media/' + str(red[2]) + """\" />"""
+            site += """         <br />"""
+            site += """         <span class='imesmall'>""" + str(red[1]) + """</span> <br /><br />"""
+            site += """         <span onClick="friends.addFriend('""" + str(red[0]) + """');" style="font-size:9px; cursor:pointer;" class='imesmall addf'>Add Friend</span> """
+            site += """     </div>"""
+
+        site += "</div>"
+
+
+    return HttpResponse(site)
+
+def AddFriend(request, user_id):
+
+    logged_in = request.user.id
+
+    with connection.cursor() as c1:
+
+        c1.execute("SELECT COUNT(*) FROM friends WHERE (id_first = '" + str(logged_in) + "' or id_second = '" + str(logged_in) + "') and (id_first = '" + str(user_id) + "' or id_second = '" + str(user_id) + "') ")
+
+        re = c1.fetchone()
+
+        if re[0] == 0:
+
+            c1.execute("INSERT INTO friends (id_first, id_second, time_sent) VALUES ('" + str(logged_in) + "', '" + str(user_id) + "', '" + str(logged_in) + "')")
+
+
+
+    return HttpResponse("ok")
+
+def Accept(request, user_id):
+    logged_in = request.user.id
+    with connection.cursor() as c:
+        c.execute("""
+        UPDATE friends SET accepted = '1' WHERE 
+        (id_first = '""" + str(user_id) + """' or id_second = '""" + str(user_id) + """') and
+        (id_first = '""" + str(logged_in) + """' or id_second = '""" + str(logged_in) + """')
+        """)
+
+    return HttpResponse("accepted")
+
+def Decline(request, user_id):
+    logged_in = request.user.id
+    with connection.cursor() as c:
+        c.execute("""
+            DELETE FROM friends WHERE 
+            (id_first = '""" + str(user_id) + """' or id_second = '""" + str(user_id) + """') and
+            (id_first = '""" + str(logged_in) + """' or id_second = '""" + str(logged_in) + """')
+        """)
+
+    return HttpResponse("declined")

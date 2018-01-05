@@ -28,8 +28,12 @@ urlpatterns = [
     url(r'^settings/$', Settings, name='Settings'),
 
     url(r'^ajax/sendmessage/$', SendMessage, name='SendMessage'),
+    url(r'^ajax/search/$', Search, name='Search'),
     url(r'^ajax/loadconversations/$', LoadConversations, name='LoadConversations'),
     url(r'^ajax/loadchat/(?P<chat_id>\d+)$', LoadChat, name='LoadChat'),
+    url(r'^ajax/accept/(?P<user_id>\d+)$', Accept, name='Accept'),
+    url(r'^ajax/decline/(?P<user_id>\d+)$', Decline, name='Decline'),
+    url(r'^ajax/addfriend/(?P<user_id>\d+)$', AddFriend, name='AddFriend'),
     url(r'^ajax/loadmessages/(?P<chat_id>\d+)$', LoadMessages, name='LoadMessages'),
     url(r'^ajax/createconversation/(?P<receiver_id>\d+)$', CreateConversation, name='CreateConversation'),
     url(r'^ajax/getnewmessages/(?P<chat_id>\d+)/(?P<last_id>\d+)$', GetNewMessages, name='GetNewMessages'),

@@ -1,4 +1,6 @@
 {% extends "main/base.html" %}
+{% load staticfiles %}
+
 {% block title %}Friends module{% endblock %}
 
 {% block content %}
@@ -25,6 +27,21 @@
       h1{
       font-family:'ubuntu';
       color:white;
+      }
+      .request {
+          float: right;
+            color:white;
+          width: 150px;
+      }
+      .request a {
+          color:white;
+      }
+      .imesmall {
+          padding: 5px 15px;
+          background: #4d3a86;
+          -webkit-border-radius: 50px;
+          -moz-border-radius: 50px;
+          border-radius: 50px;
       }
       .ime{
 
@@ -93,11 +110,13 @@
             <h2 id="add"> &nbsp;Add by username:</h2>
         <div class="row">
            <div class="col-md-6">
-                <form>
+                <form action="javascript:;">
                     <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Type Name...">
+                    <input type="text" id="search-name" class="form-control" placeholder="Type Name...">
                     </div>
                 </form>
+               <br />
+               <div class="populate-users"></div>
            </div>
 
            <div class="col-md-6">
@@ -106,8 +125,8 @@
            </div>
         </div>
     </div>
-
-
+    <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
+    <script src="{% static 'js/friends.js' %}"></script>
 </body>
 
 
