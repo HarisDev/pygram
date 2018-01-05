@@ -119,7 +119,7 @@ def LoadConversations(request):
                           <div class="avatar-icon">
                           """ + count + """
                           <div class='""" + ofonlinex + """'>&nbsp;</div>
-                            <img src='""" + slika + """"'>
+                            <img src='""" + slika + """'>
                           </div>
                         </div>
                         <div class="col-sm-9 col-xs-9 sideBar-main">
@@ -176,6 +176,7 @@ def LoadChat(request, chat_id):
     username = other_user.username
     first_name = other_user.first_name
     last_name = other_user.last_name
+    avatar = slika = str('/media/'+other_user.avatar)
     display_name = returnName(first_name, last_name, username)
     lasttimestamp = lastseen
 
@@ -195,7 +196,7 @@ def LoadChat(request, chat_id):
     <div class="row heading chathead" id='""" + chat_id + """'>
             <div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
               <div class="heading-avatar-icon">
-                <img src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                <img src='""" + avatar + """'>
               </div>
             </div>
             <div class="col-sm-8 col-xs-7 heading-name">
@@ -290,12 +291,14 @@ def LoadMessages(request, chat_id):
                 klase[1] = "hidden"
                 klase[2] = "sender"
 
+            avatar = slika = str('/media/'other_user.avatar)
+
             site += """
             
             <div class="row message-body" id='""" + str(id_poruke) + """'>
               <div class="col-sm-12 """ + klase[0] + """">
                 <div class="heading-avatar-icon """ + klase[1] + """">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                    <img src='""" + avatar + """'>
                   </div>
                 <div class='""" + klase[2] + """'>
                   <div class="message-text">
@@ -351,6 +354,7 @@ def GetNewMessages(request, chat_id, last_id):
                 if id_sender != request.user.id:
                     try:
                         other_user = User.objects.get(id=id_sender)
+                        avatar = slika = str('/media/'+other_user.avatar)
                     except  User.DoesNotExist:
                         print("No user")
                     klase[0] = "message-main-receiver"
@@ -366,7 +370,7 @@ def GetNewMessages(request, chat_id, last_id):
                 <div class="row message-body" id='""" + str(id_poruke) + """'>
                   <div class="col-sm-12 """ + klase[0] + """">
                     <div class="heading-avatar-icon """ + klase[1] + """">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                        <img src='""" + avatar + """'>
                       </div>
                     <div class='""" + klase[2] + """'>
                       <div class="message-text">
