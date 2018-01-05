@@ -5,7 +5,7 @@ def friends(request):
     logged_in=request.user.id
     with connection.cursor() as cursor:
         cursor.execute("""
-        SELECT a1.id, a1.username, a1.first_name, a1.last_name FROM 
+        SELECT a1.id, a1.username, a1.first_name, a1.last_name, a1.avatar FROM 
           ( SELECT 
             CASE WHEN c.id_first = '""" + str(logged_in) + """"' THEN id_second
                  WHEN c.id_second = '""" + str(logged_in) + """"' THEN id_first
@@ -25,7 +25,8 @@ def friends(request):
             else:
                 klasa="col-md-2"
             site+="""<div class='""" + klasa + """'>"""
-            site+="""<img src="https://bootdey.com/img/Content/avatar/avatar1.png" /><br /> <br />  """
+            site+="""<img src='/media/""" +  str(red[4]) + """'
+             /><br /> <br />  """
             site+="<span class='ime'>"+red[2]+" "+red[3]+"</span>"
             site+="""</div>"""
             x+=1
@@ -39,7 +40,7 @@ def friends(request):
         for redx in korisnici:
 
             lista += """<div class='  col-md-4  find'>"""
-            lista += """<img src="https://bootdey.com/img/Content/avatar/avatar1.png" /><br /> <br />  """
+            lista += """<img src='/media/""" +  str(redx[1]) + """' /><br /> <br />  """
             lista += "<span class='ime'>" + redx[0] + "</span>"
             lista += """</div>"""
 
