@@ -4,9 +4,13 @@
   padding: 0;
   font-weight: 300;
 }
+html {
+  height: 100%;
+}
 body {
   font-family: 'Source Sans Pro', sans-serif;
   color: white;
+  height:100%;
   font-weight: 300;
   background: #764ba2;
   background: -webkit-linear-gradient(top left, #667eea 0%, #764ba2 100%);
