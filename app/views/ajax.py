@@ -350,7 +350,7 @@ def GetNewMessages(request, chat_id, last_id):
                 tz = pytz.timezone("Europe/Sarajevo")
                 time_fixed = str(datetime.datetime.fromtimestamp(time_sent, tz).strftime("%H:%M"))
                 klase = ["", "", ""]
-
+                avatar = ""
                 if id_sender != request.user.id:
                     try:
                         other_user = User.objects.get(id=id_sender)
