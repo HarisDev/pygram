@@ -176,7 +176,7 @@ def LoadChat(request, chat_id):
     username = other_user.username
     first_name = other_user.first_name
     last_name = other_user.last_name
-    avatar = slika = str('/media/'+other_user.avatar)
+    avatar  = str('/media/'+other_user.avatar)
     display_name = returnName(first_name, last_name, username)
     lasttimestamp = lastseen
 
@@ -291,7 +291,7 @@ def LoadMessages(request, chat_id):
                 klase[1] = "hidden"
                 klase[2] = "sender"
 
-            avatar = slika = str('/media/'other_user.avatar)
+            avatar  = str('/media/'other_user.avatar)
 
             site += """
             
@@ -354,7 +354,7 @@ def GetNewMessages(request, chat_id, last_id):
                 if id_sender != request.user.id:
                     try:
                         other_user = User.objects.get(id=id_sender)
-                        avatar = slika = str('/media/'+other_user.avatar)
+                        avatar  = str('/media/'+other_user.avatar)
                     except  User.DoesNotExist:
                         print("No user")
                     klase[0] = "message-main-receiver"
