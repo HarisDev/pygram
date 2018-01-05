@@ -22,7 +22,7 @@ jQuery(document).ready(function(){
     });
 });
 
-var ucitavanje, newmsg = 0;
+var ucitavanje, newmsg = 0, request;
 chat = {
 
     init : function (){
@@ -95,12 +95,15 @@ chat = {
     },
 
     getMessages : function(callback){
+        if(request){
+            request.abort()
+        }
         last_id = jQuery(".row.message-body").last().attr("id");
         if(last_id == undefined){
             last_id = "1"
         }
         chat_id = jQuery(".chathead").attr("id");
-        jQuery.ajax({
+        request = jQuery.ajax({
             method: "POST",
             url: "/ajax/getnewmessages/" + chat_id + "/" + last_id,
             csrfmiddlewaretoken: window.CSRF_TOKEN,
@@ -108,8 +111,11 @@ chat = {
                 xhr.setRequestHeader("X-CSRFToken", window.CSRF_TOKEN);
             },
             success: function(response){
-                if(response != ""){
+
+                if(response != "" ){
+
                     jQuery("#conversation").append(response).fadeIn();
+
                     jQuery("#conversation").animate({ scrollTop: $("#conversation").prop("scrollHeight") }, 500);
                 }
                 ucitavanje = setTimeout(callback,500);

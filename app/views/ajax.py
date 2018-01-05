@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.db import connection
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import *
-from django.contrib.auth.models import User
 from app.functions import *
+from app.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.utils.dateformat import format
 import datetime
@@ -52,7 +52,7 @@ def LoadConversations(request):
 
     with connection.cursor() as cursor:
         cursor.execute("""
-        SELECT sub.id, a1.username, a1.first_name, a1.last_name, a1.id FROM 
+        SELECT sub.id, a1.username, a1.first_name, a1.last_name, a1.id, a1.avatar FROM 
           ( SELECT id,
             CASE WHEN c.id_first = '""" + str(logged_in) + """"' THEN id_second
                  WHEN c.id_second = '""" + str(logged_in) + """"' THEN id_first
@@ -66,6 +66,7 @@ def LoadConversations(request):
         for red in rezultat:
 
             id = red[0]
+            slika = str('/media/'+red[5])
 
             if ofonline(red[4]) == True:
                 ofonlinex = "avatar-online"
@@ -118,7 +119,7 @@ def LoadConversations(request):
                           <div class="avatar-icon">
                           """ + count + """
                           <div class='""" + ofonlinex + """'>&nbsp;</div>
-                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                            <img src='""" + slika + """'>
                           </div>
                         </div>
                         <div class="col-sm-9 col-xs-9 sideBar-main">
@@ -160,10 +161,8 @@ def LoadChat(request, chat_id):
         """)
         rezultat = cursor.fetchone()
     other_id = rezultat[0]
-    try:
-        other_user = User.objects.get(id=other_id)
-    except  User.DoesNotExist:
-        print("No user")
+    other_user = User.objects.get(id=other_id)
+
 
     with connection.cursor() as cx:
         cx.execute("""
@@ -175,6 +174,7 @@ def LoadChat(request, chat_id):
     username = other_user.username
     first_name = other_user.first_name
     last_name = other_user.last_name
+    avatar  = str('/media/'+str(other_user.avatar))
     display_name = returnName(first_name, last_name, username)
     lasttimestamp = lastseen
 
@@ -194,7 +194,7 @@ def LoadChat(request, chat_id):
     <div class="row heading chathead" id='""" + chat_id + """'>
             <div class="col-sm-2 col-md-1 col-xs-3 heading-avatar">
               <div class="heading-avatar-icon">
-                <img src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                <img src='""" + avatar + """'>
               </div>
             </div>
             <div class="col-sm-8 col-xs-7 heading-name">
@@ -275,12 +275,9 @@ def LoadMessages(request, chat_id):
             tz = pytz.timezone("Europe/Sarajevo")
             time_fixed = str(datetime.datetime.fromtimestamp(time_sent, tz).strftime("%H:%M"))
             klase = ["", "", ""]
-
+            other_user = User.objects.get(id=id_sender)
             if id_sender != request.user.id:
-                try:
-                    other_user = User.objects.get(id=id_sender)
-                except  User.DoesNotExist:
-                    print("No user")
+
                 klase[0] = "message-main-receiver"
                 klase[1] = "message-avatar"
                 klase[2] = "receiver"
@@ -289,12 +286,14 @@ def LoadMessages(request, chat_id):
                 klase[1] = "hidden"
                 klase[2] = "sender"
 
+            avatar  = str('/media/' + str(other_user.avatar))
+
             site += """
-            
+            <br />
             <div class="row message-body" id='""" + str(id_poruke) + """'>
               <div class="col-sm-12 """ + klase[0] + """">
                 <div class="heading-avatar-icon """ + klase[1] + """">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                    <img src='""" + avatar + """'>
                   </div>
                 <div class='""" + klase[2] + """'>
                   <div class="message-text">
@@ -346,12 +345,11 @@ def GetNewMessages(request, chat_id, last_id):
                 tz = pytz.timezone("Europe/Sarajevo")
                 time_fixed = str(datetime.datetime.fromtimestamp(time_sent, tz).strftime("%H:%M"))
                 klase = ["", "", ""]
-
+                avatar = ""
+                other_user = User.objects.get(id=id_sender)
+                avatar  = str('/media/'+str(other_user.avatar))
                 if id_sender != request.user.id:
-                    try:
-                        other_user = User.objects.get(id=id_sender)
-                    except  User.DoesNotExist:
-                        print("No user")
+
                     klase[0] = "message-main-receiver"
                     klase[1] = "message-avatar"
                     klase[2] = "receiver"
@@ -365,7 +363,7 @@ def GetNewMessages(request, chat_id, last_id):
                 <div class="row message-body" id='""" + str(id_poruke) + """'>
                   <div class="col-sm-12 """ + klase[0] + """">
                     <div class="heading-avatar-icon """ + klase[1] + """">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png">
+                        <img src='""" + avatar + """'>
                       </div>
                     <div class='""" + klase[2] + """'>
                       <div class="message-text">

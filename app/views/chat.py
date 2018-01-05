@@ -10,7 +10,7 @@ def chat(request):
     friends_list = ""
     with connection.cursor() as cursor:
         cursor.execute("""
-        SELECT a1.id, a1.username, a1.first_name, a1.last_name FROM 
+        SELECT a1.id, a1.username, a1.first_name, a1.last_name, a1.avatar FROM 
           ( SELECT 
             CASE WHEN c.id_first = '""" + str(logged_in) + """"' THEN id_second
                  WHEN c.id_second = '""" + str(logged_in) + """"' THEN id_first
@@ -43,13 +43,14 @@ def chat(request):
             username = red[1]
             first_name = red[2]
             last_name = red[3]
+            avatar = str('/media/'+str(red[4]))
             display_name = returnName(first_name, last_name, username)
 
             friends_list += """
             <div class="row sideBar-body" onClick=\"""" + jsfunction +  """\">
                         <div class="col-sm-3 col-xs-3 sideBar-avatar">
                           <div class="avatar-icon">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png">
+                            <img src='""" + avatar + """'>
                           </div>
                         </div>
                         <div class="col-sm-9 col-xs-9 sideBar-main">
@@ -67,5 +68,5 @@ def chat(request):
                         </div>
                       </div>
             """
-
-    return render(request, 'main/chat.html', {"friends_list": friends_list})
+    current_user_avatar = """<img width="40" src='/media/""" + str(request.user.avatar) + """' />"""
+    return render(request, 'main/chat.html', {"friends_list": friends_list, 'current_user_avatar': current_user_avatar})
