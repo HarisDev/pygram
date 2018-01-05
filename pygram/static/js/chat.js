@@ -22,7 +22,7 @@ jQuery(document).ready(function(){
     });
 });
 
-var ucitavanje, newmsg = 0;
+var ucitavanje, newmsg = 0, request;
 chat = {
 
     init : function (){
@@ -98,7 +98,6 @@ chat = {
         if(request){
             request.abort()
         }
-        twice = 0;
         last_id = jQuery(".row.message-body").last().attr("id");
         if(last_id == undefined){
             last_id = "1"
@@ -113,10 +112,10 @@ chat = {
             },
             success: function(response){
 
-                if(response != "" && twice == 0){
+                if(response != "" ){
 
                     jQuery("#conversation").append(response).fadeIn();
-                    twice = 1;
+
                     jQuery("#conversation").animate({ scrollTop: $("#conversation").prop("scrollHeight") }, 500);
                 }
                 ucitavanje = setTimeout(callback,500);
