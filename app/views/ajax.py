@@ -460,3 +460,17 @@ def Decline(request, user_id):
         """)
 
     return HttpResponse("declined")
+
+def FriendRequests(request):
+
+    logged_in = request.user.id
+
+    with connection.cursor() as c1:
+
+        c1.execute("SELECT COUNT(*) FROM friends WHERE (id_first = '" + str(logged_in) + "' or id_second = '" + str(logged_in) + "') and accepted = '0' and time_sent != '" + str(logged_in) + "'")
+
+        re = c1.fetchone()
+    if re:
+        return HttpResponse(re)
+    else:
+        return HttpResponse("0")

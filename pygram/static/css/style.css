@@ -11,7 +11,9 @@ span {
 body {
   background-image: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
 }
-
+.friend-requests {
+  background: red;
+}
 .fa-2x {
   font-size: 1.5em;
 }
@@ -334,6 +336,19 @@ body {
 }
 .unread-msg {
   background: rgba(255, 10, 15, 0.04);
+}
+.unread-2 {
+  width: 21px;
+  height: 21px;
+  margin: -30px 45px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  background: red;
+  color: white;
+  position: absolute;
+  border-radius: 50%;
+  border: solid 2px white;
 }
 .unread {
   width: 21px;

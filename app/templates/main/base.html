@@ -19,6 +19,28 @@
         <!-- Emoji Data -->
         <script type="text/javascript" src="{% static 'js/jquery.emojis.js' %}"></script>
 
+        <script>
+            function checkRequests(){
+                jQuery.ajax({
+                    method: "POST",
+                    url: "/ajax/friendrequests/",
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                    beforeSend: function(xhr, settings) {
+                        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                    },
+                    success: function(response){
+                        if(response != "0"){
+                            jQuery(".friends .friend-requests").html(response).fadeIn();
+                        } else {
+                            jQuery(".friends .friend-requests").fadeOut();
+                        }
+                    }
+                });
+            }
+            jQuery(document).ready(function(){
+                checkRequests();
+            });
+        </script>
 
     </head>
 
@@ -31,7 +53,7 @@
                 <div class="col-md-6">
                     <ul class="menu">
                         <a href="/chat"><li>Home</li></a>
-                        <a href="/friends"><li>Friends</li></a>
+                        <a class="friends" href="/friends"><li>Friends <span style="display:none" class="unread-2 friend-requests"></span></li></a>
                         <a href="/settings"><li>Settings</li></a>
                         <a href="/logout"><li>Logout ({{ request.user.username }})</li></a>
                     </ul>
