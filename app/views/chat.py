@@ -68,5 +68,5 @@ def chat(request):
                         </div>
                       </div>
             """
-
-    return render(request, 'main/chat.html', {"friends_list": friends_list})
+    current_user_avatar = """<img width="40" src='/media/""" + str(request.user.avatar) + """' />"""
+    return render(request, 'main/chat.html', {"friends_list": friends_list, 'current_user_avatar': current_user_avatar})
