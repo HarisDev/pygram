@@ -149,6 +149,9 @@ chat = {
 
     openChat : function(id){
         clearTimeout(ucitavanje);
+        if (jQuery( window ).width() < 768){
+            jQuery(".side").fadeOut();
+        }
         jQuery.ajax({
             method: "POST",
             url: "/ajax/loadchat/" + id,

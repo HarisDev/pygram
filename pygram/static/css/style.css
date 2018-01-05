@@ -15,7 +15,17 @@ body {
 .fa-2x {
   font-size: 1.5em;
 }
-
+@media screen and (max-width: 768px){
+  .message-body img {
+    display:none;
+  }
+  .heading, .heading a {
+    color:white;
+  }
+  .menu li {
+    padding: 5px 5px;
+  }
+}
 .app {
   position: relative;
   overflow: hidden;
