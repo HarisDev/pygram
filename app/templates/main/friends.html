@@ -2,5 +2,106 @@
 {% block title %}Friends module{% endblock %}
 
 {% block content %}
-    Friends Module
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=="UTF-8"/>
+    <title>Friends</title>
+     <style>
+      .col-md-4 img{
+        border-radius:50%;
+        width:160px;
+      }
+      .col-md-2 img{
+        border-radius:50%;
+        width:128px;
+      }
+      .col-md-4, .col-md-2{
+        text-align:center;
+        color:white;
+        font-family:'ubuntu';
+      }
+      h1{
+      font-family:'ubuntu';
+      color:white;
+      }
+      .ime{
+
+       padding: 10px 15px;
+       background: #4d3a86;
+       -webkit-border-radius: 50px;
+       -moz-border-radius: 50px;
+       border-radius: 50px;
+
+
+      }
+      .lista .col-md-2, .lista .col-md-4{
+        height:230px;
+       }
+       .form-control{
+            padding: 10px 15px;
+            background: #4d3a86;
+            -webkit-border-radius: 50px;
+            -moz-border-radius: 50px;
+            border-radius: 50px;
+            color: white;
+            border: solid 0px;
+            width:250px;
+       }
+       #add{
+       font-size:18px;
+       font-family:'ubuntu';
+       color:white;
+
+       }
+     </style>
+</head>
+<body>
+
+
+    <div class="container">
+        <header>
+            <center>
+                <h1>Friends List</h1>
+            </center>
+
+        </header>
+        <div class="row lista">
+
+            {{ varijabla|safe }}
+        </div>
+
+        </br>
+        </br>
+
+
+
+
+            <center>
+                <h1>Add Friends</h1>
+            </center>
+         </br>
+         </br>
+            <h2 id="add"> &nbsp;Add by username:</h2>
+        <div class="row">
+           <div class="col-md-6">
+                <form>
+                    <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Type Name...">
+                    </div>
+                </form>
+           </div>
+
+           <div class="col-md-6">
+
+           </div>
+        </div>
+    </div>
+
+
+</body>
+
+
+
+</html>
 {% endblock %}
