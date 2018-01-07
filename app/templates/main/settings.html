@@ -1,6 +1,74 @@
 {% extends "main/base.html" %}
+{% load staticfiles %}
+
 {% block title %}Settings module{% endblock %}
 
 {% block content %}
-    Settings Module
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=="UTF-8"/>
+    <title>settings</title>
+    <style>
+		h1 {
+			font-family:'ubuntu';
+			color:white;
+			margin-bottom: 50px;
+			margin-top: 40px;
+		    }
+		.form-control{
+		    padding: 10px 15px;
+		    background: #4d3a86;
+		    -webkit-border-radius: 50px;
+		    -moz-border-radius: 50px;
+		    border-radius: 50px;
+		    color: white;
+		    border: solid 0px;
+		    width:250px;
+		    }
+		label {
+			color: white;
+		}
+		#mejn {
+			margin-top: 30px;
+
+		}
+       
+     </style>
+</head>
+<body>
+	<center>
+		<div class="container">
+		  <h1>Change info :</h2>
+		  <form>
+		    <div class="form-group">
+		      <label for="usr">New Username:</label>
+		      <input type="text" class="form-control" id="usr">
+		    </div>
+		    <div class="form-group">
+		      <label for="pwd">New Password:</label>
+		      <input type="password" class="form-control" id="pwd">
+		    </div>
+		    <div class="form-group">
+		      <label for="usr">New E-mail:</label>
+		      <input type="text" class="form-control" id="usr">
+		    </div>
+		    <div class="form-group">
+		      <label for="usr">New First Name:</label>
+		      <input type="text" class="form-control" id="usr">
+		    </div>
+		    <div class="form-group">
+		      <label for="usr">New Last Name:</label>
+		      <input type="text" class="form-control" id="usr">
+		    </div>
+		    <div class="form-group">
+		      <label for="usr">New Avatar:</label>
+		      <button type="button" class="btn btn-default">Upload</button>
+		    </div>
+		  </form>
+		  <button id="mejn" type="button" class="btn btn-default">Save changes</button>
+		</div>
+	</center>
+</body>
+</html>
 {% endblock %}
