@@ -89,7 +89,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'pygram',
         'USER': 'pygramclient',
-        'PASSWORD': 'haris',
+        'PASSWORD': '*****',
         'HOST': '89.36.218.144',
         'PORT': '3306',
         'OPTIONS': {
